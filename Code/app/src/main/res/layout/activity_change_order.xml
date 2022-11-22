@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_screen"
-    tools:context=".CreateOrder" >
+    tools:context=".ChangeOrder">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:fontFamily="@font/kranky"
-                android:text="New Order"
+                android:text="Change Order"
                 android:textColor="#000000"
                 android:textSize="30sp" />
         </TableRow>
@@ -171,7 +171,7 @@
                     android:layout_marginBottom="10dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Your Name"
+                    android:text="Name"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 

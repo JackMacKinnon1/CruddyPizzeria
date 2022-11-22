@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_screen"
+    tools:context=".ViewAllOrders" >
+
+    <LinearLayout
+        android:id="@+id/fullPageLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableRow
+            android:id="@+id/row0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="#FFBA08"
+            android:gravity="center"
+            android:paddingVertical="17dp">
+
+            <TextView
+                android:id="@+id/cruddyPizzaHeaderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="Cruddy Pizzeria"
+                android:textColor="#FCF7F8"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <ScrollView
+            android:id="@+id/mainBodyScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="13dp">
+
+            <TableLayout
+                android:id="@+id/displayLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

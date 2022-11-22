@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button placeOrderBtn;
+    Button placeOrderBtn, viewOrderBtn, changeOrderBtn, cancelOrderBtn;
 
 
     @Override
@@ -18,7 +18,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         placeOrderBtn = findViewById(R.id.placeOrderBtn);
+        viewOrderBtn = findViewById(R.id.viewOrderBtn);
+        changeOrderBtn = findViewById(R.id.changeOrderBtn);
+        cancelOrderBtn = findViewById(R.id.cancelOrderBtn);
+
+
+
         placeOrderBtn.setOnClickListener(createOrder);
+        viewOrderBtn.setOnClickListener(searchOrder);
+        changeOrderBtn.setOnClickListener(searchOrder);
+        cancelOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ViewAllOrders.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 
@@ -29,4 +45,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     };
+
+    private View.OnClickListener searchOrder = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent i = new Intent(MainActivity.this, OrderNumberLookUp.class);
+            startActivity(i);
+        }
+    };
+
+
 }
