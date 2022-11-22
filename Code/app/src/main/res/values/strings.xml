@@ -1,7 +1,31 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string-array name="english">
+    <string name="language">Language:</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <string-array name="mainPageEnglish">
         <item>Cruddy Pizzeria</item>
         <item>Please select an option to start</item>
+        <item>Place an order</item>
+        <item>View an order</item>
+        <item>Change an order</item>
+        <item>Cancel an order</item>
+        <item>View all orders</item>
+    </string-array>
+    <string-array name="createOrderEnglish">
+        <item>New Order</item>
+        <item>Size</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Toppings (Max 3)</item>
+        <item>Cheese</item>
+        <item>Pepperoni</item>
+        <item>Sausage</item>
+        <item>Pineapple</item>
+        <item>Bacon</item>
+        <item>Green Peppers</item>
+        <item>Your Name</item>
+        <item>Submit</item>
     </string-array>
 </resources>
