@@ -49,6 +49,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/inter_bold"
                 android:gravity="center"
+                android:numeric="signed|integer"
                 android:text="Please enter the order number to look up"
                 android:textColor="#000000"
                 android:textSize="20dp" />
@@ -77,9 +78,10 @@
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/main_bg"
+                    android:editable="true"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="textPersonName" />
+                    android:inputType="numberSigned" />
 
                 <Button
                     android:id="@+id/orderNumberSubmitBtn"
