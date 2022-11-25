@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,12 +13,19 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ViewAllOrders extends AppCompatActivity {
 
     TableRow orderRow;
+    TextView cruddyPizzaHeaderTextView;
     LinearLayout stk;
     TableLayout ll;
 
+    SharedPreferences prefs;
+
+    List<String> Language;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -26,6 +34,10 @@ public class ViewAllOrders extends AppCompatActivity {
         setContentView(R.layout.activity_view_all_orders);
 
 
+        cruddyPizzaHeaderTextView = findViewById(R.id.cruddyPizzaHeaderTextView);
+
+
+        changeLanguage();
 
         //init();
 
@@ -66,4 +78,15 @@ public class ViewAllOrders extends AppCompatActivity {
 
     }
 
+    private void changeLanguage() {
+        prefs = getSharedPreferences("LanguageValue", MODE_PRIVATE);
+        if ("FRENCH".equals(prefs.getString("LANGUAGE", ""))) {
+            Language = Arrays.asList(getResources().getStringArray(R.array.orderNumLookUpFrench));
+        } else {
+            Language = Arrays.asList(getResources().getStringArray(R.array.orderNumLookUpEnglish));
+        }
+
+        //Setting the text of the views to be the language pulled in
+        cruddyPizzaHeaderTextView.setText(Language.get(0));
+    }
 }

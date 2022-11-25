@@ -3,11 +3,15 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class OrderNumberLookUp extends AppCompatActivity {
 
@@ -16,19 +20,26 @@ public class OrderNumberLookUp extends AppCompatActivity {
     TextView orderNumberLookUpTextView, cruddyPizzaHeaderTextView;
     Bundle extras;
 
+
+    SharedPreferences prefs;
     Intent i;
     int numLookup;
+    List<String> Language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_number_look_up);
 
+
         //Connecting views
         orderNumberEditText = findViewById(R.id.orderNumberEditText);
         orderNumberSubmitBtn = findViewById(R.id.orderNumberSubmitBtn);
         orderNumberLookUpTextView = findViewById(R.id.orderNumberLookUpTextView);
         cruddyPizzaHeaderTextView = findViewById(R.id.cruddyPizzaHeaderTextView);
+
+        changeLanguage();
+
 
         orderNumberSubmitBtn.setOnClickListener(submitNumberLookUp);
 
@@ -40,9 +51,9 @@ public class OrderNumberLookUp extends AppCompatActivity {
                 case "VIEW":
                     i = new Intent(OrderNumberLookUp.this, ViewSpecificOrder.class);
                     break;
-                case "DELETE":
-
-                    break;
+//                case "DELETE":
+//
+//                    break;
                 case "EDIT":
                     i = new Intent(OrderNumberLookUp.this, ChangeOrder.class);
                     break;
@@ -70,5 +81,22 @@ public class OrderNumberLookUp extends AppCompatActivity {
             startActivity(i);
         }
     };
+
+    private void changeLanguage()
+    {
+        prefs = getSharedPreferences("LanguageValue", MODE_PRIVATE);
+        if ("FRENCH".equals(prefs.getString("LANGUAGE", ""))) {
+            Language = Arrays.asList(getResources().getStringArray(R.array.orderNumLookUpFrench));
+        } else {
+            Language = Arrays.asList(getResources().getStringArray(R.array.orderNumLookUpEnglish));
+        }
+
+        //Setting the text of the views to be the language pulled in
+        cruddyPizzaHeaderTextView.setText(Language.get(0));
+        orderNumberLookUpTextView.setText(Language.get(1));
+        orderNumberSubmitBtn.setText(Language.get(2));
+    }
+
+
 
 }

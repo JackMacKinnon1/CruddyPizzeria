@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:fontFamily="@font/inter_bold"
-                android:text="Cruddy Pizzeria"
                 android:textColor="#FCF7F8"
                 android:textSize="35dp"
                 android:textStyle="bold" />
@@ -40,13 +39,12 @@
             android:layout_marginRight="30dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/orderNumberTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:clickable="false"
                 android:fontFamily="@font/kranky"
-                android:text="Order #"
                 android:textColor="#000000"
                 android:textSize="30sp" />
         </TableRow>
@@ -66,7 +64,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/sizeTextView"
+                    android:id="@+id/customerNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -74,7 +72,6 @@
                     android:layout_marginRight="15dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Customer Name"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
@@ -91,7 +88,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/sizeTextView5"
+                    android:id="@+id/sizeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -99,7 +96,6 @@
                     android:layout_marginRight="15dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Size"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
@@ -116,39 +112,38 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/sizeTextView7"
+                    android:id="@+id/oneOrderToppingsTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Toppings"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/toppingOneCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
-                    android:text="CheckBox" />
+                    android:clickable="false" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/toppingTwoCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
-                    android:text="CheckBox" />
+                    android:clickable="false" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/toppingThreeCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
-                    android:text="CheckBox" />
+                    android:clickable="false" />
 
                 <TextView
-                    android:id="@+id/sizeTextView8"
+                    android:id="@+id/orderPlacedDateTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -156,7 +151,6 @@
                     android:layout_marginRight="15dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Order Placed"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 

@@ -1,15 +1,19 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,8 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     TextView cruddyPizzaHeaderTextView, orderNumberLoopUpTextView, languageTextView;
 
+    SharedPreferences prefs;
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch languageSwitch;
+
+    List<String> Language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,32 @@ public class MainActivity extends AppCompatActivity {
         placeOrderBtn.setOnClickListener(createOrder);
         viewAllOrdersBtn.setOnClickListener(viewAllOrders);
 
+        //Setting the language
+        changeLanguage();
+
+
+        languageSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String LANG_VALUE = "";
+
+                if (Objects.equals(prefs.getString("LANGUAGE", ""), "FRENCH"))
+                {
+                    LANG_VALUE = "ENGLISH";
+                }
+                else
+                {
+                    LANG_VALUE = "FRENCH";
+                }
+
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("LANGUAGE", LANG_VALUE);
+                editor.apply();
+
+                changeLanguage();
+
+            }
+        });
 
 
 
@@ -93,6 +127,28 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     };
+
+    private void changeLanguage()
+    {
+        prefs = getSharedPreferences("LanguageValue", MODE_PRIVATE);
+        if ("FRENCH".equals(prefs.getString("LANGUAGE", ""))) {
+            Language = Arrays.asList(getResources().getStringArray(R.array.mainPageFrench));
+            languageSwitch.setChecked(true);
+        } else {
+            Language = Arrays.asList(getResources().getStringArray(R.array.mainPageEnglish));
+        }
+
+        //Setting the text of the views
+        cruddyPizzaHeaderTextView.setText(Language.get(0));
+        orderNumberLoopUpTextView.setText(Language.get(1));
+        placeOrderBtn.setText(Language.get(2));
+        viewOrderBtn.setText(Language.get(3));
+        changeOrderBtn.setText(Language.get(4));
+        cancelOrderBtn.setText(Language.get(5));
+        viewAllOrdersBtn.setText(Language.get(6));
+        languageTextView.setText(Language.get(7));
+        languageSwitch.setText(Language.get(8));
+    }
 
 
 

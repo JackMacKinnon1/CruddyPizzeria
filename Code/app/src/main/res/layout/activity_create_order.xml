@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:fontFamily="@font/inter_bold"
-                android:text="Cruddy Pizzeria"
                 android:textColor="#FCF7F8"
                 android:textSize="35dp"
                 android:textStyle="bold" />
@@ -40,12 +39,11 @@
             android:layout_marginRight="30dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/orderNumberTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:fontFamily="@font/kranky"
-                android:text="New Order"
                 android:textColor="#000000"
                 android:textSize="30sp" />
         </TableRow>
@@ -64,13 +62,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/sizeTextView"
+                    android:id="@+id/customerNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Size"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
@@ -85,7 +82,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:fontFamily="@font/kranky"
-                        android:text="Small"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -94,7 +90,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:fontFamily="@font/kranky"
-                        android:text="Medium"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -103,20 +98,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:fontFamily="@font/kranky"
-                        android:text="Large"
                         android:textColor="#000000"
                         android:textSize="20dp" />
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/sizeTextView2"
+                    android:id="@+id/toppingsTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Toppings (Max 3)"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
@@ -124,43 +117,37 @@
                     android:id="@+id/cheeseCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cheese" />
+                    android:layout_marginLeft="10dp" />
 
                 <CheckBox
                     android:id="@+id/pepperoniCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Pepperoni" />
+                    android:layout_marginLeft="10dp" />
 
                 <CheckBox
                     android:id="@+id/sausageCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Sausage" />
+                    android:layout_marginLeft="10dp" />
 
                 <CheckBox
                     android:id="@+id/pineappleCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Pineapple" />
+                    android:layout_marginLeft="10dp" />
 
                 <CheckBox
                     android:id="@+id/baconCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Bacon" />
+                    android:layout_marginLeft="10dp" />
 
                 <CheckBox
                     android:id="@+id/greenPeppersCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Green Peppers" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:id="@+id/yourNameTextView"
@@ -171,7 +158,6 @@
                     android:layout_marginBottom="10dp"
                     android:clickable="false"
                     android:fontFamily="@font/kranky"
-                    android:text="Your Name"
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
@@ -195,7 +181,6 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#F0BA2F"
                     android:fontFamily="@font/inter_bold"
-                    android:text="Submit"
                     android:textColor="#000000"
                     android:textSize="15sp"
                     android:textStyle="bold"

@@ -25,7 +25,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:text="Cruddy Pizzeria"
                 android:textColor="#FCF7F8"
                 android:textSize="35dp"
                 android:textStyle="bold" />
@@ -34,6 +33,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="27dp"
             android:gravity="center">
 
             <TextView
@@ -43,7 +44,7 @@
                 android:layout_marginTop="45dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Please select an option to start"
+                android:gravity="center"
                 android:textColor="#000000"
                 android:textSize="20dp" />
         </TableRow>
@@ -75,9 +76,8 @@
                         android:layout_weight="50"
                         android:backgroundTint="#F0BA2F"
                         android:fontFamily="@font/inter_bold"
-                        android:text="Place an order"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="15dp" />
 
@@ -89,9 +89,8 @@
                         android:layout_weight="50"
                         android:backgroundTint="#F0BA2F"
                         android:fontFamily="@font/inter_bold"
-                        android:text="View an order"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="15dp" />
 
@@ -109,9 +108,8 @@
                         android:layout_weight="50"
                         android:backgroundTint="#F0BA2F"
                         android:fontFamily="@font/inter_bold"
-                        android:text="Change an order"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="15dp" />
 
@@ -123,9 +121,8 @@
                         android:layout_weight="50"
                         android:backgroundTint="#F0BA2F"
                         android:fontFamily="@font/inter_bold"
-                        android:text="Cancel an order"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="15dp" />
                 </TableRow>
@@ -142,9 +139,8 @@
                         android:layout_weight="50"
                         android:backgroundTint="#F0BA2F"
                         android:fontFamily="@font/inter_bold"
-                        android:text="View all orders"
                         android:textColor="#000000"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="15dp" />
                 </TableRow>
@@ -176,7 +172,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="50dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/language"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -186,7 +181,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/english"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 

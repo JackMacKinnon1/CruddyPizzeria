@@ -11,8 +11,22 @@
         <item>Change an order</item>
         <item>Cancel an order</item>
         <item>View all orders</item>
+        <item>Language</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="mainPageFrench">
+        <item>Pizzeria Cruddy</item>
+        <item>Veuillez sélectionner une option pour commencer</item>
+        <item>Placer un Commander</item>
+        <item>Voir une commande</item>
+        <item>Modifier une commande</item>
+        <item>Annuler une commande</item>
+        <item>Voir toutes les commandes</item>
+        <item>Langue</item>
+        <item>Français</item>
     </string-array>
     <string-array name="createOrderEnglish">
+        <item>Cruddy Pizzeria</item>
         <item>New Order</item>
         <item>Size</item>
         <item>Small</item>
@@ -28,6 +42,90 @@
         <item>Your Name</item>
         <item>Submit</item>
     </string-array>
+    <string-array name="createOrderFrench">
+        <item>Pizzeria Cruddy</item>
+        <item>Nouvelle commande</item>
+        <item>Taille</item>
+        <item>Petite</item>
+        <item>Moyen</item>
+        <item>Grande</item>
+        <item>Garnitures (Max 3)</item>
+        <item>Fromage</item>
+        <item>Pepperoni</item>
+        <item>Saucisson</item>
+        <item>Ananas</item>
+        <item>Lard</item>
+        <item>Poivrons verts</item>
+        <item>votre nom</item>
+        <item>Soumettre</item>
+    </string-array>
+    <string-array name="orderNumLookUpEnglish">
+        <item>Cruddy Pizzeria</item>
+        <item>Please enter the order number to look up</item>
+        <item>Submit</item>
+    </string-array>
+    <string-array name="orderNumLookUpFrench">
+        <item>Pizzeria Cruddy</item>
+        <item>Veuillez entrer le numéro de commande pour rechercher</item>
+        <item>Soumettre</item>
+    </string-array>
+    <string-array name="viewSpecificOrderEnglish">
+        <item>Cruddy Pizzeria</item>
+        <item>Order #</item>
+        <item>Customer Name</item>
+        <item>Size</item>
+        <item>Toppings</item>
+        <item>Order Placed</item>
+    </string-array>
+    <string-array name="viewSpecificOrderFrench">
+        <item>Pizzeria Cruddy</item>
+        <item>Ordre #</item>
+        <item>Nom du client</item>
+        <item>Taille</item>
+        <item>Garnitures</item>
+        <item>Commande passée</item>
+    </string-array>
+    <string-array name="changeOrderEnglish">
+        <item>Cruddy Pizzeria</item>
+        <item>Change Order</item>
+        <item>Size</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Toppings (Max 3)</item>
+        <item>Cheese</item>
+        <item>Pepperoni</item>
+        <item>Sausage</item>
+        <item>Pineapple</item>
+        <item>Bacon</item>
+        <item>Green Peppers</item>
+        <item>Name</item>
+        <item>Submit</item>
+    </string-array>
+    <string-array name="changeOrderFrench">
+        <item>Pizzeria Cruddy</item>
+        <item>Change l\'ordre</item>
+        <item>Taille</item>
+        <item>Petite</item>
+        <item>Moyen</item>
+        <item>Grande</item>
+        <item>Garnitures (Max 3)</item>
+        <item>Fromage</item>
+        <item>Pepperoni</item>
+        <item>Saucisson</item>
+        <item>Ananas</item>
+        <item>Lard</item>
+        <item>Poivrons verts</item>
+        <item>Nom</item>
+        <item>Soumettre</item>
+    </string-array>
+    <string-array name="viewAllOrdersEnglish">
+        <item>Cruddy Pizzeria</item>
+    </string-array>
+    <string-array name="viewAllOrdersFrench">
+        <item>Pizzeria Cruddy</item>
+    </string-array>
+
     <string name="title_activity_view_all_orders">ViewAllOrders</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
