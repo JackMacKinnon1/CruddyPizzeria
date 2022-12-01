@@ -46,6 +46,8 @@ public class ViewAllOrders extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
 
             View tr = inflator.inflate(R.layout.order_cell, null, false);
+            TextView orderNumber = tr.findViewById(R.id.OrderNumberTextView);
+            orderNumber.setText("Order Number: " + (i + 1));
             ll.addView(tr);
 
 

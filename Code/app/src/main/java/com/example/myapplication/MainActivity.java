@@ -10,10 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.*;
+import android.database.*;
+import com.example.myapplication.DBAdapter;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.io.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +38,56 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Open or create database
+        try {
+            String destPath = "/data/data/" + getPackageName() + "/database/CruddyPizza";
+
+            File f = new File(destPath);
+
+            if (!f.exists()) {
+                CopyDB(getBaseContext().getAssets().open("CruddyPizza"),
+                        new FileOutputStream(destPath));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Db Adapter
+        DBAdapter db = new DBAdapter(this);
+
+        //Testing database with test values
+        db.open();
+        long id = db.insertRecord("Jack", "Medium", "Pepperoni", "Sausage", "Cheese");
+        id = db.insertRecord("Andre", "Medium", "Pepperoni", "Sausage", "Cheese");
+
+        //Close database
+        db.close();
+
+        //get all orders
+        db.open();
+        Cursor c = db.getAllRecords();
+        if (c.moveToFirst()) {
+            do {
+                DisplayContact(c);
+            } while (c.moveToNext());
+        }
+        db.close();
+
+        //get order by id
+        db.open();
+        c = db.getRecord(1);
+        if (c.moveToFirst()) {
+            do {
+                DisplayContact(c);
+            } while (c.moveToNext());
+        }
+
+        db.close();
+
+
 
         //Connecting views
         placeOrderBtn = findViewById(R.id.placeOrderBtn);
@@ -81,6 +137,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void CopyDB (InputStream inputStream, OutputStream outputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, length);
+        }
+        outputStream.flush();
+        outputStream.close();
+        inputStream.close();
+    }
+
+    public void DisplayContact(Cursor c) {
+        Toast.makeText(this,
+                "id: " + c.getString(0) + "\n" +
+                        "Name: " + c.getString(1) + "\n" +
+                        "Size: " + c.getString(2) + "\n" +
+                        "Toppings: " + c.getString(3) + "\n" +
+                        "Toppings: " + c.getString(4) + "\n" +
+                        "Toppings: " + c.getString(5) + "\n",
+                Toast.LENGTH_LONG).show();
     }
 
     private View.OnClickListener searchOrder = new View.OnClickListener() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Cruddy Pizzeria</string>
     <string name="language">Language:</string>
     <string name="english">English</string>
     <string name="french">French</string>
