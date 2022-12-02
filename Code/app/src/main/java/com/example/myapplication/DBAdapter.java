@@ -22,14 +22,13 @@ public class DBAdapter {
 
     private static final String DATABASE_CREATE =
             "create table orders (_id integer primary key autoincrement, "
-                    + "name text not null, size text not null, topping_one text, topping_two text, topping_three text, order_date text not null);";
+                    + "name text not null, size int not null, topping_one int not null, topping_two int not null, topping_three int not null, order_date text not null);";
     //seed database with some data
-    private static final String DATABASE_SEED =
-            "INSERT INTO orders (name, size, topping_one, topping_two, topping_three, order_date) VALUES ('John Smith', 'Large', 'Pepperoni', 'Sausage', 'Mushrooms', 'date'), "
-            + "('Jane Doe', 'Medium', 'Pepperoni', 'Sausage', 'Mushrooms', 'date'), "
-            + "('Jack MacKinnon', 'Small', 'Pepperoni', 'Sausage', 'Mushrooms', 'date'), "
-            + "('Jill MacKinnon', 'Large', 'Pepperoni', 'Sausage', 'Mushrooms', 'date'), "
-            + "('John MacKinnon', 'Medium', 'Pepperoni', 'Sausage', 'Mushrooms', 'date');";
+    private static final String DATABASE_SEED = "INSERT INTO orders (name, size, topping_one, topping_two, topping_three, order_date) VALUES ('John Smith', 1, 1, 2, 3, '2019-01-01'), "
+            +"('Jane Doe', 2, 2, 3, 1, '2019-01-02'), "
+            +"('Jack MacKinnon', 2, 2, 3, 1, '2015-01-02'), "
+            +"('John Smith', 3, 3, 1, 2, '2019-01-03'), "
+            +"('Jane Doe', 1, 1, 2, 3, '2019-01-04');";
 
 
     private Context context;
@@ -80,7 +79,7 @@ public class DBAdapter {
     }// end of close method
 
     //insert a record into the database
-    public long insertRecord(String name, String size, String topping_one, String topping_two, String topping_three, String order_date) {
+    public long insertRecord(String name, int size, int topping_one, int topping_two, int topping_three, String order_date) {
         //sanitize the data
         name = name.trim();
 
@@ -114,7 +113,7 @@ public class DBAdapter {
     }// end of getAllRecords method
 
     //update a single contact
-    public boolean updateOrder(long rowId, String name, String size, String topping_one, String topping_two, String topping_three, String order_date) {
+    public boolean updateOrder(long rowId, String name, int size, int topping_one, int topping_two, int topping_three, String order_date) {
         //sanitize the data
         name = name.trim();
 

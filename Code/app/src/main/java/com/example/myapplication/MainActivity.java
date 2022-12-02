@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (deleted)
             {
-                Toast.makeText(this, "Order " + orderID + " has been deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Order " + orderID + " has been cancelled", Toast.LENGTH_SHORT).show();
             }
             else
             {

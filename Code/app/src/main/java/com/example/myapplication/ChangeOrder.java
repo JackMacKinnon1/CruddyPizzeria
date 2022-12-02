@@ -32,7 +32,7 @@ public class ChangeOrder extends AppCompatActivity {
     TextView newOrderTextView, cruddyPizzaHeaderTextView, sizeTextView, toppingsTextView, yourNameTextView;
     EditText nameEditText;
     Button submitBtn;
-    String size = "";
+    int size = 0;
     int orderID;
 
     SharedPreferences prefs;
@@ -83,29 +83,21 @@ public class ChangeOrder extends AppCompatActivity {
                     nameEditText.setText(name);
 
                     //get the order size
-                    size = c.getString(2);
-                    if (size.equals("Small")) {
+                    size = Integer.parseInt(c.getString(2));
+                    //set the radio button to the correct size
+                    if (size == 1) {
                         smallRadioBtn.setChecked(true);
-                    } else if (size.equals("Medium")) {
+                    } else if (size == 2) {
                         mediumRadioBtn.setChecked(true);
-                    } else if (size.equals("Large")) {
+                    } else if (size == 3) {
                         largeRadioBtn.setChecked(true);
                     }
 
                     //for each item in the spinner
-                    for (int i = 0; i < toppingOneSpinner.getCount(); i++) {
-                        //if the item is in the toppings array list
-                        if (toppingOneSpinner.getItemAtPosition(i).toString().equals(c.getString(3))) {
-                            //set the spinner to that item
-                            toppingOneSpinner.setSelection(i);
-                        }
-                        if (toppingTwoSpinner.getItemAtPosition(i).toString().equals(c.getString(4))) {
-                            toppingTwoSpinner.setSelection(i);
-                        }
-                        if (toppingThreeSpinner.getItemAtPosition(i).toString().equals(c.getString(5))) {
-                            toppingThreeSpinner.setSelection(i);
-                        }
-                    }
+                    toppingOneSpinner.setSelection(Integer.parseInt(c.getString(3)));
+                    toppingTwoSpinner.setSelection(Integer.parseInt(c.getString(4)));
+                    toppingThreeSpinner.setSelection(Integer.parseInt(c.getString(5)));
+
                 } while (c.moveToNext());
             }
             db.close();
@@ -118,9 +110,21 @@ public class ChangeOrder extends AppCompatActivity {
     View.OnClickListener sizeEntry = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RadioButton temp = (RadioButton) v;
 
-            size = temp.getText().toString();
+            int idOfSize = sizeRadioGroup.getCheckedRadioButtonId();
+
+            //switch statement to determine which size was selected
+            switch (idOfSize) {
+                case R.id.smallRadioBtn:
+                    size = 1;
+                    break;
+                case R.id.mediumRadioBtn:
+                    size = 2;
+                    break;
+                case R.id.largeRadioBtn:
+                    size = 3;
+                    break;
+            }
         }
     };
 
@@ -139,7 +143,7 @@ public class ChangeOrder extends AppCompatActivity {
                 //get the current date and time
                 String date = java.text.DateFormat.getDateTimeInstance().format(java.util.Calendar.getInstance().getTime());
 
-                db.updateOrder(orderID, nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString(), date);
+                db.updateOrder(orderID, nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItemPosition(), toppingTwoSpinner.getSelectedItemPosition(), toppingThreeSpinner.getSelectedItemPosition(), date);
                 db.close();
             }
 

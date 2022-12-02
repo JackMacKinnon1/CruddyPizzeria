@@ -31,7 +31,7 @@ public class CreateOrder extends AppCompatActivity {
     RadioButton smallRadioBtn, mediumRadioBtn, largeRadioBtn;
     EditText nameEditText;
     Button submitBtn;
-    String size = "";
+    int size = 0;
     TextView newOrderTextView, cruddyPizzaHeaderTextView, sizeTextView, toppingsTextView, yourNameTextView;
 
     String orderCreatedPopUp;
@@ -78,16 +78,28 @@ public class CreateOrder extends AppCompatActivity {
     View.OnClickListener sizeEntry = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RadioButton temp = (RadioButton) v;
 
-            size = temp.getText().toString();
+            int idOfSize = sizeRadioGroup.getCheckedRadioButtonId();
+
+            //switch statement to determine which size was selected
+            switch (idOfSize) {
+                case R.id.smallRadioBtn:
+                    size = 1;
+                    break;
+                case R.id.mediumRadioBtn:
+                    size = 2;
+                    break;
+                case R.id.largeRadioBtn:
+                    size = 3;
+                    break;
+            }
         }
     };
 
     View.OnClickListener submit = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (Objects.equals(size, "") || nameEditText.getText().toString().equals(""))
+            if (size == 0 || nameEditText.getText().toString().equals(""))
             {
                 return;
             }
@@ -97,7 +109,7 @@ public class CreateOrder extends AppCompatActivity {
             //get the current date and time
             String date = java.text.DateFormat.getDateTimeInstance().format(java.util.Calendar.getInstance().getTime());
 
-            long id = db.insertRecord(nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString(), date);
+            long id = db.insertRecord(nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItemPosition(), toppingTwoSpinner.getSelectedItemPosition(), toppingThreeSpinner.getSelectedItemPosition(), date);
             db.close();
 
             //Redirect to home
