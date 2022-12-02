@@ -17,7 +17,7 @@ import java.io.*;
 public class ViewSpecificOrder extends AppCompatActivity {
 
     TextView cruddyPizzaHeaderTextView, orderNumberTextView, customerNameTextView, sizeTextView, oneOrderToppingsTextView,
-        orderPlacedDateTextView, customerNameEditText, sizeEditText;
+        orderPlacedDateTextView, customerNameEditText, sizeEditText, orderPlacedDateEditText;
 
     CheckBox toppingOneCheckBox, toppingTwoCheckBox, toppingThreeCheckBox;
 
@@ -50,6 +50,7 @@ public class ViewSpecificOrder extends AppCompatActivity {
         toppingThreeCheckBox = findViewById(R.id.toppingThreeCheckBox);
         customerNameEditText = findViewById(R.id.customerNameEditText);
         sizeEditText = findViewById(R.id.sizeEditText);
+        orderPlacedDateEditText = findViewById(R.id.orderPlacedDateEditText);
 
         changeLanguage();
 
@@ -75,6 +76,7 @@ public class ViewSpecificOrder extends AppCompatActivity {
                     toppingOneCheckBox.setChecked(true);
                     toppingTwoCheckBox.setChecked(true);
                     toppingThreeCheckBox.setChecked(true);
+                    orderPlacedDateEditText.setText(c.getString(6));
 
 
                 } while (c.moveToNext());

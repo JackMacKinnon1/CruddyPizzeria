@@ -41,6 +41,7 @@
         <item>Green Peppers</item>
         <item>Your Name</item>
         <item>Submit</item>
+        <item>Order Created!</item>
     </string-array>
     <string-array name="createOrderFrench">
         <item>Pizzeria Cruddy</item>
@@ -58,6 +59,7 @@
         <item>Poivrons verts</item>
         <item>votre nom</item>
         <item>Soumettre</item>
+        <item>Commande créée!</item>
     </string-array>
     <string-array name="orderNumLookUpEnglish">
         <item>Cruddy Pizzeria</item>
@@ -121,9 +123,13 @@
     </string-array>
     <string-array name="viewAllOrdersEnglish">
         <item>Cruddy Pizzeria</item>
+        <item>Order #</item>
+        <item>Name: </item>
     </string-array>
     <string-array name="viewAllOrdersFrench">
         <item>Pizzeria Cruddy</item>
+        <item>Ordre #</item>
+        <item>Nom: </item>
     </string-array>
 
     <string name="title_activity_view_all_orders">ViewAllOrders</string>

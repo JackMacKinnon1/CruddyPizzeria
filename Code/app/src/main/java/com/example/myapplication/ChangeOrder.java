@@ -136,7 +136,10 @@ public class ChangeOrder extends AppCompatActivity {
             {
                 DBAdapter db = new DBAdapter(ChangeOrder.this);
                 db.open();
-                db.updateOrder(orderID, nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString());
+                //get the current date and time
+                String date = java.text.DateFormat.getDateTimeInstance().format(java.util.Calendar.getInstance().getTime());
+
+                db.updateOrder(orderID, nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString(), date);
                 db.close();
             }
 

@@ -64,10 +64,18 @@ public class MainActivity extends AppCompatActivity {
         {
             DBAdapter db = new DBAdapter(this);
             db.open();
-            db.deleteRecord(orderID);
+            //delete the order from the database and return to a bool
+            boolean deleted = db.deleteRecord(orderID);
             db.close();
 
-            Toast.makeText(this, "Order " + orderID + " has been deleted", Toast.LENGTH_LONG).show();
+            if (deleted)
+            {
+                Toast.makeText(this, "Order " + orderID + " has been deleted", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(this, "Could not find Order #" + orderID, Toast.LENGTH_SHORT).show();
+            }
         }
 
 
@@ -119,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
 

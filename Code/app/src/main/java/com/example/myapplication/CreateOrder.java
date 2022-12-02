@@ -34,6 +34,8 @@ public class CreateOrder extends AppCompatActivity {
     String size = "";
     TextView newOrderTextView, cruddyPizzaHeaderTextView, sizeTextView, toppingsTextView, yourNameTextView;
 
+    String orderCreatedPopUp;
+
     SharedPreferences prefs;
 
     List<String> Language;
@@ -92,13 +94,16 @@ public class CreateOrder extends AppCompatActivity {
             //open database and make a new order
             DBAdapter db = new DBAdapter(CreateOrder.this);
             db.open();
-            long id = db.insertRecord(nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString());
+            //get the current date and time
+            String date = java.text.DateFormat.getDateTimeInstance().format(java.util.Calendar.getInstance().getTime());
+
+            long id = db.insertRecord(nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString(), date);
             db.close();
 
             //Redirect to home
             Intent i = new Intent(CreateOrder.this, MainActivity.class);
             //Toast pop up
-            Toast toast = Toast.makeText(getApplicationContext(), "Order created!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), orderCreatedPopUp, Toast.LENGTH_LONG);
             toast.show();
             startActivity(i);
         }
@@ -138,6 +143,8 @@ public class CreateOrder extends AppCompatActivity {
         toppingsTextView.setText(Language.get(6));
         yourNameTextView.setText(Language.get(13));
         submitBtn.setText(Language.get(14));
+
+        orderCreatedPopUp = Language.get(15);
     }
 
 
