@@ -120,47 +120,20 @@
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
-                <CheckBox
-                    android:id="@+id/cheeseCheckBox"
+                <Spinner
+                    android:id="@+id/toppingOneEditSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cheese" />
+                    android:layout_height="wrap_content" />
 
-                <CheckBox
-                    android:id="@+id/pepperoniCheckBox"
+                <Spinner
+                    android:id="@+id/toppingTwoEditSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Pepperoni" />
+                    android:layout_height="wrap_content" />
 
-                <CheckBox
-                    android:id="@+id/sausageCheckBox"
+                <Spinner
+                    android:id="@+id/toppingThreeEditSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Sausage" />
-
-                <CheckBox
-                    android:id="@+id/pineappleCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Pineapple" />
-
-                <CheckBox
-                    android:id="@+id/baconCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Bacon" />
-
-                <CheckBox
-                    android:id="@+id/greenPeppersCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Green Peppers" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/yourNameTextView"

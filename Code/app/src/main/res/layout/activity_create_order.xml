@@ -113,41 +113,20 @@
                     android:textColor="#000000"
                     android:textSize="25sp" />
 
-                <CheckBox
-                    android:id="@+id/cheeseCheckBox"
+                <Spinner
+                    android:id="@+id/toppingOneSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_height="wrap_content" />
 
-                <CheckBox
-                    android:id="@+id/pepperoniCheckBox"
+                <Spinner
+                    android:id="@+id/toppingTwoSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_height="wrap_content" />
 
-                <CheckBox
-                    android:id="@+id/sausageCheckBox"
+                <Spinner
+                    android:id="@+id/toppingThreeSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
-
-                <CheckBox
-                    android:id="@+id/pineappleCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
-
-                <CheckBox
-                    android:id="@+id/baconCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
-
-                <CheckBox
-                    android:id="@+id/greenPeppersCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/yourNameTextView"

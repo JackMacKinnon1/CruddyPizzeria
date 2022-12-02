@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //Open or create database
         try {
             String destPath = "/data/data/" + getPackageName() + "/database/CruddyPizza";
@@ -55,37 +56,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Db Adapter
-        DBAdapter db = new DBAdapter(this);
+        //check if there is a order id in the intent
+        Intent intent = getIntent();
+        int orderID = intent.getIntExtra("ORDERNUM", 0);
 
-        //Testing database with test values
-        db.open();
-        long id = db.insertRecord("Jack", "Medium", "Pepperoni", "Sausage", "Cheese");
-        id = db.insertRecord("Andre", "Medium", "Pepperoni", "Sausage", "Cheese");
+        if (orderID != 0)
+        {
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            db.deleteRecord(orderID);
+            db.close();
 
-        //Close database
-        db.close();
-
-        //get all orders
-        db.open();
-        Cursor c = db.getAllRecords();
-        if (c.moveToFirst()) {
-            do {
-                DisplayContact(c);
-            } while (c.moveToNext());
-        }
-        db.close();
-
-        //get order by id
-        db.open();
-        c = db.getRecord(1);
-        if (c.moveToFirst()) {
-            do {
-                DisplayContact(c);
-            } while (c.moveToNext());
+            Toast.makeText(this, "Order " + orderID + " has been deleted", Toast.LENGTH_LONG).show();
         }
 
-        db.close();
+
 
 
 

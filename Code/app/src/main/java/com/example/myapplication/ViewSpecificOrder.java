@@ -6,14 +6,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.*;
+import android.database.*;
+import com.example.myapplication.DBAdapter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.io.*;
 
 public class ViewSpecificOrder extends AppCompatActivity {
 
     TextView cruddyPizzaHeaderTextView, orderNumberTextView, customerNameTextView, sizeTextView, oneOrderToppingsTextView,
-        orderPlacedDateTextView;
+        orderPlacedDateTextView, customerNameEditText, sizeEditText;
 
     CheckBox toppingOneCheckBox, toppingTwoCheckBox, toppingThreeCheckBox;
 
@@ -28,6 +32,11 @@ public class ViewSpecificOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_specific_order);
 
+        //pull the order number from the intent
+        int orderNumber = getIntent().getIntExtra("ORDERNUM", 0);
+
+
+
 
         //Connecting views
         cruddyPizzaHeaderTextView = findViewById(R.id.cruddyPizzaHeaderTextView);
@@ -39,8 +48,42 @@ public class ViewSpecificOrder extends AppCompatActivity {
         toppingOneCheckBox = findViewById(R.id.toppingOneCheckBox);
         toppingTwoCheckBox = findViewById(R.id.toppingTwoCheckBox);
         toppingThreeCheckBox = findViewById(R.id.toppingThreeCheckBox);
+        customerNameEditText = findViewById(R.id.customerNameEditText);
+        sizeEditText = findViewById(R.id.sizeEditText);
 
         changeLanguage();
+
+        //check if the order number is not zero and query the database for the order
+        if (orderNumber != 0) {
+            //query the database for the order
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            Cursor c = db.getRecord(orderNumber);
+
+            //set the text views to the order information
+            if (c.moveToFirst()) {
+                do {
+                    //append the order number to the order text view
+                    orderNumberTextView.setText(orderNumberTextView.getText() + c.getString(0));
+
+                    customerNameEditText.setText(c.getString(1));
+                    sizeEditText.setText(c.getString(2));
+                    toppingOneCheckBox.setText(c.getString(3));
+                    toppingTwoCheckBox.setText(c.getString(4));
+                    toppingThreeCheckBox.setText(c.getString(5));
+                    //check the boxes for the toppings
+                    toppingOneCheckBox.setChecked(true);
+                    toppingTwoCheckBox.setChecked(true);
+                    toppingThreeCheckBox.setChecked(true);
+
+
+                } while (c.moveToNext());
+            }
+
+            db.close();
+
+
+        }
 
 
 

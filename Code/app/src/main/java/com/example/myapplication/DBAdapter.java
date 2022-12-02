@@ -19,7 +19,7 @@ public class DBAdapter {
 
     private static final String DATABASE_CREATE =
             "create table orders (_id integer primary key autoincrement," +
-            "name text not null, size text not null, topping_one text not null, topping_two text not null, topping_three text not null);";
+            "name text not null, size text not null, topping_one text, topping_two text, topping_three text);";
 
 
     private Context context;

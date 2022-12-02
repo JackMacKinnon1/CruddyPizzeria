@@ -15,9 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.*;
+import android.database.*;
+import com.example.myapplication.DBAdapter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.io.*;
 
 public class ViewAllOrders extends AppCompatActivity {
 
@@ -41,19 +45,34 @@ public class ViewAllOrders extends AppCompatActivity {
 
         changeLanguage();
 
+        //query database for all orders
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        Cursor c = db.getAllRecords();
         LayoutInflater inflator = LayoutInflater.from(this);
 
-        for (int i = 0; i < 10; i++) {
+        //loop through all orders
+        if (c.moveToFirst()) {
+            do {
+                View tr = inflator.inflate(R.layout.order_cell, null, false);
+                TextView orderNumber = tr.findViewById(R.id.OrderNumberTextView);
+                TextView orderName = tr.findViewById(R.id.NameOnOrderTextView);
 
-            View tr = inflator.inflate(R.layout.order_cell, null, false);
-            TextView orderNumber = tr.findViewById(R.id.OrderNumberTextView);
-            orderNumber.setText("Order Number: " + (i + 1));
-            ll.addView(tr);
+                //get the primary key of the order
+                String orderNum = c.getString(0);
+
+                //get the name on the order
+                String name = c.getString(1);
+
+                //set the text of the textviews
+                orderNumber.setText(orderNum);
+                orderName.setText(name);
 
 
-//            ll.addView(row);
-
+                ll.addView(tr);
+            } while (c.moveToNext());
         }
+
 
 
 

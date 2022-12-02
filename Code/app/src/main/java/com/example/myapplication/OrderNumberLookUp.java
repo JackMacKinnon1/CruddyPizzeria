@@ -1,17 +1,29 @@
 package com.example.myapplication;
 
+//import database tools
+import android.database.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import com.example.myapplication.DBAdapter;
+import java.io.*;
 
 public class OrderNumberLookUp extends AppCompatActivity {
 
@@ -51,9 +63,6 @@ public class OrderNumberLookUp extends AppCompatActivity {
                 case "VIEW":
                     i = new Intent(OrderNumberLookUp.this, ViewSpecificOrder.class);
                     break;
-//                case "DELETE":
-//
-//                    break;
                 case "EDIT":
                     i = new Intent(OrderNumberLookUp.this, ChangeOrder.class);
                     break;

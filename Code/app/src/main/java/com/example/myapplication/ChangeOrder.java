@@ -1,16 +1,20 @@
 package com.example.myapplication;
 
+//import database tools
+import android.database.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +22,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import com.example.myapplication.DBAdapter;
+import java.io.*;
 
 public class ChangeOrder extends AppCompatActivity {
-    CheckBox cheeseCheckBox, pepperoniCheckBox, sausageCheckBox, pineappleCheckBox, baconCheckBox, greenPeppersCheckBox;
+    Spinner toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
     RadioGroup sizeRadioGroup;
     RadioButton smallRadioBtn, mediumRadioBtn, largeRadioBtn;
     TextView newOrderTextView, cruddyPizzaHeaderTextView, sizeTextView, toppingsTextView, yourNameTextView;
     EditText nameEditText;
     Button submitBtn;
-    ArrayList<String> Toppings;
     String size = "";
+    int orderID;
 
     SharedPreferences prefs;
 
@@ -38,16 +44,13 @@ public class ChangeOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order);
 
+        //get the order id from the intent
+        Intent intent = getIntent();
+        orderID = intent.getIntExtra("ORDERNUM", 0);
 
-        Toppings = new ArrayList<>();
-
-
-        cheeseCheckBox = findViewById(R.id.cheeseCheckBox);
-        pepperoniCheckBox = findViewById(R.id.pepperoniCheckBox);
-        sausageCheckBox = findViewById(R.id.sausageCheckBox);
-        pineappleCheckBox = findViewById(R.id.pineappleCheckBox);
-        baconCheckBox = findViewById(R.id.baconCheckBox);
-        greenPeppersCheckBox = findViewById(R.id.greenPeppersCheckBox);
+        toppingOneSpinner = findViewById(R.id.toppingOneSpinner);
+        toppingTwoSpinner = findViewById(R.id.toppingTwoSpinner);
+        toppingThreeSpinner = findViewById(R.id.toppingThreeSpinner);
         submitBtn = findViewById(R.id.submitBtn);
         sizeRadioGroup = findViewById(R.id.sizeRadioGroup);
         smallRadioBtn = findViewById(R.id.smallRadioBtn);
@@ -60,12 +63,7 @@ public class ChangeOrder extends AppCompatActivity {
         toppingsTextView = findViewById(R.id.toppingsTextView);
         yourNameTextView = findViewById(R.id.yourNameTextView);
 
-        cheeseCheckBox.setOnClickListener(addTopping);
-        pepperoniCheckBox.setOnClickListener(addTopping);
-        sausageCheckBox.setOnClickListener(addTopping);
-        pineappleCheckBox.setOnClickListener(addTopping);
-        baconCheckBox.setOnClickListener(addTopping);
-        greenPeppersCheckBox.setOnClickListener(addTopping);
+
         submitBtn.setOnClickListener(submit);
         smallRadioBtn.setOnClickListener(sizeEntry);
         mediumRadioBtn.setOnClickListener(sizeEntry);
@@ -73,28 +71,49 @@ public class ChangeOrder extends AppCompatActivity {
 
         changeLanguage();
 
+        //open the database and get the order info if the order id is not 0
+        if (orderID != 0) {
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            Cursor c = db.getRecord(orderID);
+            if (c.moveToFirst()) {
+                do {
+                    //get the order name
+                    String name = c.getString(1);
+                    nameEditText.setText(name);
+
+                    //get the order size
+                    size = c.getString(2);
+                    if (size.equals("Small")) {
+                        smallRadioBtn.setChecked(true);
+                    } else if (size.equals("Medium")) {
+                        mediumRadioBtn.setChecked(true);
+                    } else if (size.equals("Large")) {
+                        largeRadioBtn.setChecked(true);
+                    }
+
+                    //for each item in the spinner
+                    for (int i = 0; i < toppingOneSpinner.getCount(); i++) {
+                        //if the item is in the toppings array list
+                        if (toppingOneSpinner.getItemAtPosition(i).toString().equals(c.getString(3))) {
+                            //set the spinner to that item
+                            toppingOneSpinner.setSelection(i);
+                        }
+                        if (toppingTwoSpinner.getItemAtPosition(i).toString().equals(c.getString(4))) {
+                            toppingTwoSpinner.setSelection(i);
+                        }
+                        if (toppingThreeSpinner.getItemAtPosition(i).toString().equals(c.getString(5))) {
+                            toppingThreeSpinner.setSelection(i);
+                        }
+                    }
+                } while (c.moveToNext());
+            }
+            db.close();
+        }
+
 
 
     }
-
-    View.OnClickListener addTopping = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            CheckBox temp = (CheckBox) v;
-
-            if (!temp.isChecked())
-            {
-                Toppings.remove(temp.getText().toString());
-            }
-            else if(Toppings.size() == 3) {
-                temp.setChecked(false);
-            }
-            else
-            {
-                Toppings.add(temp.getText().toString());
-            }
-        }
-    };
 
     View.OnClickListener sizeEntry = new View.OnClickListener() {
         @Override
@@ -112,7 +131,14 @@ public class ChangeOrder extends AppCompatActivity {
             {
                 return;
             }
-            //Going to do pack it up into a database and submit it
+            //update an order in the database if the order id is not 0
+            if (orderID != 0)
+            {
+                DBAdapter db = new DBAdapter(ChangeOrder.this);
+                db.open();
+                db.updateOrder(orderID, nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString());
+                db.close();
+            }
 
             //Redirect to home
             Intent i = new Intent(ChangeOrder.this, MainActivity.class);
@@ -132,6 +158,20 @@ public class ChangeOrder extends AppCompatActivity {
             Language = Arrays.asList(getResources().getStringArray(R.array.changeOrderEnglish));
         }
 
+        //Toppings indexes: 7-12
+        //Setting text of items
+        ArrayList<String> temp = new ArrayList<>();
+        for (int i = 7; i < 13; i++) {
+            temp.add(Language.get(i));
+        }
+
+        //adding each topping to the spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, temp);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toppingOneSpinner.setAdapter(adapter);
+        toppingTwoSpinner.setAdapter(adapter);
+        toppingThreeSpinner.setAdapter(adapter);
+
         //Setting text of items
         cruddyPizzaHeaderTextView.setText(Language.get(0));
         newOrderTextView.setText(Language.get(1));
@@ -140,12 +180,6 @@ public class ChangeOrder extends AppCompatActivity {
         mediumRadioBtn.setText(Language.get(4));
         largeRadioBtn.setText(Language.get(5));
         toppingsTextView.setText(Language.get(6));
-        cheeseCheckBox.setText(Language.get(7));
-        pepperoniCheckBox.setText(Language.get(8));
-        sausageCheckBox.setText(Language.get(9));
-        pineappleCheckBox.setText(Language.get(10));
-        baconCheckBox.setText(Language.get(11));
-        greenPeppersCheckBox.setText(Language.get(12));
         yourNameTextView.setText(Language.get(13));
         submitBtn.setText(Language.get(14));
     }

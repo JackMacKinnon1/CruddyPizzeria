@@ -1,16 +1,19 @@
 package com.example.myapplication;
-
+//import database tools
+import android.database.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,15 +21,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import com.example.myapplication.DBAdapter;
+import java.io.*;
 
 public class CreateOrder extends AppCompatActivity {
 
-    CheckBox cheeseCheckBox, pepperoniCheckBox, sausageCheckBox, pineappleCheckBox, baconCheckBox, greenPeppersCheckBox;
+    Spinner toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
     RadioGroup sizeRadioGroup;
     RadioButton smallRadioBtn, mediumRadioBtn, largeRadioBtn;
     EditText nameEditText;
     Button submitBtn;
-    ArrayList<String> Toppings;
     String size = "";
     TextView newOrderTextView, cruddyPizzaHeaderTextView, sizeTextView, toppingsTextView, yourNameTextView;
 
@@ -41,15 +45,9 @@ public class CreateOrder extends AppCompatActivity {
 
 
 
-        Toppings = new ArrayList<>();
-
-
-        cheeseCheckBox = findViewById(R.id.cheeseCheckBox);
-        pepperoniCheckBox = findViewById(R.id.pepperoniCheckBox);
-        sausageCheckBox = findViewById(R.id.sausageCheckBox);
-        pineappleCheckBox = findViewById(R.id.pineappleCheckBox);
-        baconCheckBox = findViewById(R.id.baconCheckBox);
-        greenPeppersCheckBox = findViewById(R.id.greenPeppersCheckBox);
+        toppingOneSpinner = findViewById(R.id.toppingOneSpinner);
+        toppingTwoSpinner = findViewById(R.id.toppingTwoSpinner);
+        toppingThreeSpinner = findViewById(R.id.toppingThreeSpinner);
         submitBtn = findViewById(R.id.submitBtn);
         sizeRadioGroup = findViewById(R.id.sizeRadioGroup);
         smallRadioBtn = findViewById(R.id.smallRadioBtn);
@@ -63,12 +61,7 @@ public class CreateOrder extends AppCompatActivity {
         yourNameTextView = findViewById(R.id.yourNameTextView);
 
 
-        cheeseCheckBox.setOnClickListener(addTopping);
-        pepperoniCheckBox.setOnClickListener(addTopping);
-        sausageCheckBox.setOnClickListener(addTopping);
-        pineappleCheckBox.setOnClickListener(addTopping);
-        baconCheckBox.setOnClickListener(addTopping);
-        greenPeppersCheckBox.setOnClickListener(addTopping);
+
         submitBtn.setOnClickListener(submit);
         smallRadioBtn.setOnClickListener(sizeEntry);
         mediumRadioBtn.setOnClickListener(sizeEntry);
@@ -79,24 +72,6 @@ public class CreateOrder extends AppCompatActivity {
 
     }
 
-    View.OnClickListener addTopping = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            CheckBox temp = (CheckBox) v;
-
-            if (!temp.isChecked())
-            {
-                Toppings.remove(temp.getText().toString());
-            }
-            else if(Toppings.size() == 3) {
-                temp.setChecked(false);
-            }
-            else
-            {
-                Toppings.add(temp.getText().toString());
-            }
-        }
-    };
 
     View.OnClickListener sizeEntry = new View.OnClickListener() {
         @Override
@@ -114,7 +89,11 @@ public class CreateOrder extends AppCompatActivity {
             {
                 return;
             }
-            //Going to do pack it up into a database and submit it
+            //open database and make a new order
+            DBAdapter db = new DBAdapter(CreateOrder.this);
+            db.open();
+            long id = db.insertRecord(nameEditText.getText().toString(), size, toppingOneSpinner.getSelectedItem().toString(), toppingTwoSpinner.getSelectedItem().toString(), toppingThreeSpinner.getSelectedItem().toString());
+            db.close();
 
             //Redirect to home
             Intent i = new Intent(CreateOrder.this, MainActivity.class);
@@ -135,7 +114,21 @@ public class CreateOrder extends AppCompatActivity {
             Language = Arrays.asList(getResources().getStringArray(R.array.createOrderEnglish));
         }
 
+        //topping indexs: 7-12
+
         //Setting text of items
+        ArrayList<String> temp = new ArrayList<>();
+        for (int i = 7; i < 13; i++) {
+            temp.add(Language.get(i));
+        }
+
+        //adding each topping to the spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, temp);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toppingOneSpinner.setAdapter(adapter);
+        toppingTwoSpinner.setAdapter(adapter);
+        toppingThreeSpinner.setAdapter(adapter);
+
         cruddyPizzaHeaderTextView.setText(Language.get(0));
         newOrderTextView.setText(Language.get(1));
         sizeTextView.setText(Language.get(2));
@@ -143,12 +136,6 @@ public class CreateOrder extends AppCompatActivity {
         mediumRadioBtn.setText(Language.get(4));
         largeRadioBtn.setText(Language.get(5));
         toppingsTextView.setText(Language.get(6));
-        cheeseCheckBox.setText(Language.get(7));
-        pepperoniCheckBox.setText(Language.get(8));
-        sausageCheckBox.setText(Language.get(9));
-        pineappleCheckBox.setText(Language.get(10));
-        baconCheckBox.setText(Language.get(11));
-        greenPeppersCheckBox.setText(Language.get(12));
         yourNameTextView.setText(Language.get(13));
         submitBtn.setText(Language.get(14));
     }
